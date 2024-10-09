@@ -1,0 +1,5 @@
+upstream express_backend {
+    server 127.0.0.1:3000;
+    server 127.0.0.1:3001;
+    health_check;  # 서버 상태를 체크
+}

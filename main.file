@@ -1,0 +1,21 @@
+worker_processes 1;
+     
+events {
+    worker_connections 1024;
+}
+
+http {
+    upstream express_backend {
+        # Express 서버 목록
+        server 127.0.0.1:3000;
+        server 127.0.0.1:3001;
+    }
+
+    server {
+        listen 80;  # HTTP 요청을 받을 포트
+
+        location / {
+            proxy_pass http://express_backend;  # 트래픽을 백엔드 풀로 전달
+        }
+    }
+}
